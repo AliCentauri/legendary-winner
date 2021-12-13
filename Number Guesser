@@ -1,0 +1,40 @@
+import random
+
+
+def get_input():
+    user = input("Would you like to play a game?: ").lower()
+    if user != "yes":
+        print("Alright, goodbye!")
+        quit()
+    else:
+        check_num()
+
+
+def validate_user_int_input(_min, _max):
+    user_input = input("Enter a number from 1 to 10:")
+    while not user_input.isdigit() or int(user_input) not in range(_min, _max + 1):
+        user_input = input(f"Input must be an integer from 0-{_max}:")
+    return int(user_input)
+
+
+def check_num():
+    num = random.randint(0, 10)
+    user_guess = validate_user_int_input(0, 10)
+    count = 0
+    while user_guess != num:
+        if user_guess < num:
+            print("Your guess was too low.")
+            user_guess = validate_user_int_input(1, 10)
+        else:
+            print("Your guess was too high")
+            user_guess = validate_user_int_input(1, 10)
+        count += 1
+
+    print(f"You guessed it correctly in {count} tries!")
+    print("Thanks for playing!")
+    print("-----------------------------------------------------")
+    quit()
+
+
+get_input()
+check_num()
